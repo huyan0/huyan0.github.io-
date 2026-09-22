@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /bbs/
+Disallow: /bbs/admin/
+Disallow: /bbs/backup/
+
+# 别看了，阿沅
