@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" width="1024" height="768">
+<rect width="1024" height="768" fill="#7C8FA3"/>
+<rect x="30" y="30" width="964" height="708" fill="none" stroke="#fff" stroke-opacity=".35" stroke-dasharray="10 8"/>
+<text x="512" y="370" font-family="sans-serif" font-size="30" fill="#fff" fill-opacity=".9" text-anchor="middle">素材占位</text>
+<text x="512" y="414" font-family="sans-serif" font-size="24" fill="#fff" fill-opacity=".8" text-anchor="middle">对岸</text>
+<text x="980" y="728" font-family="monospace" font-size="30" font-weight="bold" fill="#FF8A1E" text-anchor="end">'09 6 7</text>
+<!-- 这张下面还有一张。 -->
+<g id="another" opacity="0"><rect width="1024" height="768" fill="#9FB0C0"/><rect x="0" y="520" width="1024" height="248" fill="#56606B"/><circle cx="512" cy="430" r="22" fill="#2B2F35"/><path d="M482 460 h60 l14 110 h-88 Z" fill="#2B2F35"/><text x="980" y="728" font-family="monospace" font-size="30" font-weight="bold" fill="#FF8A1E" text-anchor="end">'09 6 14</text><text x="44" y="70" font-family="serif" font-size="22" fill="#2B2F35">05:32　接到了。</text></g>
+</svg>

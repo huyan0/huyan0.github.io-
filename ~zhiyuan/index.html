@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>纸鸢的小屋</title>
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}*,*::before,*::after{box-sizing:inherit}
+:root{--bg:#FBF9F4;--ink:#2B2926;--muted:#9A948A;--line:#E8E3D8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1B1A18;--ink:#E4DFD6;--muted:#8C867C;--line:#302E2A}}
+:root[data-theme="dark"]{--bg:#1B1A18;--ink:#E4DFD6;--muted:#8C867C;--line:#302E2A}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/2.1 "STSong","Songti SC","SimSun","Noto Serif SC",serif}
+.w{max-width:460px;margin:0 auto;padding:70px 24px 90px}
+header{text-align:center;margin-bottom:60px}
+header h1{font-size:22px;font-weight:normal;letter-spacing:8px;margin:0}
+header p{color:var(--muted);font-size:13px;margin:6px 0 0;letter-spacing:2px}
+.player{display:inline-flex;align-items:center;gap:8px;margin-top:18px;border:1px solid var(--line);padding:3px 12px;font-size:12px;color:var(--muted);background:none;cursor:pointer;font-family:inherit}
+section{margin:0 0 64px}
+h2{font-size:17px;font-weight:normal;letter-spacing:4px;margin:0}
+time{display:block;font-size:12px;color:var(--muted);margin-bottom:14px;letter-spacing:1px}
+section p{margin:0}
+footer{text-align:center;color:var(--muted);font-size:12px}
+footer a{color:var(--muted)}
+</style></head>
+<body><div class="w">
+<header><h1>纸鸢</h1><p>写着玩的</p><button class="player" id="play" type="button" aria-pressed="false">♪ 点击播放背景音乐</button></header>
+<section><h2>北窗</h2><time>2006-11-20</time><p>北窗很小<br>刚好放进一块天<br>有时候是云<br>有时候是你们</p></section><section><h2>作业本</h2><time>2007-3-12</time><p>风翻到最后一页<br>我还没写完<br>没关系<br>明天也是一页</p></section><section><h2>给一粒盐</h2><time>2008-2-14</time><p>你说话的时候<br>整条走廊都是亮的<br>我不太会说话<br>就把我那份红烧肉也给你</p></section><section><h2>雨季</h2><time>2008-6-10</time><p>雨下了一整个礼拜<br>风筝收在床底下<br>等天晴<br>等天晴</p></section><section><h2>晚自习</h2><time>2008-10-28</time><p>九点四十的铃<br>教室的灯一盏一盏灭<br>我们排队走出去<br>像一句话里的字</p></section><section><h2>老K的晚霞</h2><time>2008-11-21</time><p>你在很远的地方<br>拍下一片红<br>寄给我们<br>好像天也可以分着看</p></section><section><h2>潮</h2><time>2009-4-2</time><p>澄川的潮水一天来两次<br>不说话，也不敲门<br>只是把岸上的东西<br>一件一件收回去<br>我知道<br>潮水会把风筝拉回地面<br>所以我得飞得再高一点</p></section><section><h2>抽屉</h2><time>2009-5-13</time><p>爸爸的抽屉锁了很多年<br>钥匙在他旧外套的口袋里<br>信封一封一封叠着<br>邮戳换过三个城市<br>一封都没有拆<br>他连看都不敢看<br>原来她一直在写</p></section><section><h2>门</h2><time>2009-5-14</time><p>晚上的门关得很响<br>碗里的饭还是热的<br>我们都没有再说话<br>我数楼下的车<br>一辆，两辆<br>数到第十七辆的时候<br>我决定不哭了</p></section><section><h2>渡口</h2><time>2009-6-8</time><p>天还没亮的时候<br>渡口只有一盏灯<br>船从雾里出来<br>像一句没说完的话<br>我想坐第一班<br>去看看对岸<br>是不是也有人等</p></section><section><h2>天亮以前</h2><time>2009-6-14</time><p>天亮以前<br>风会转向<br>灯我关了<br>窗留着</p></section><section><h2>后半句</h2><time>2009-6-13</time><p>我没写完的那句话<br>手心里还攥着</p></section>
+<footer><a href="../bbs/index.html">回北窗</a></footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('play'),ctx=null,timer=null,on=false;
+  var M=[659,587,523,440,523,587,523,440,392,440,523,587,523,0,440,392];
+  function note(f,t){if(!f)return;var o=ctx.createOscillator(),g=ctx.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.12,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+1.6);o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+1.7);}
+  function loop(){var t=ctx.currentTime+0.05;M.forEach(function(f,i){note(f,t+i*0.55);});timer=setTimeout(loop,M.length*550+1200);}
+  b.addEventListener('click',function(){
+    try{
+      if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();}
+      if(!on){ctx.resume();loop();on=true;b.textContent='♪ 暂停';b.setAttribute('aria-pressed','true');}
+      else{clearTimeout(timer);ctx.suspend();on=false;b.textContent='♪ 点击播放背景音乐';b.setAttribute('aria-pressed','false');}
+    }catch(e){b.textContent='♪ 这个浏览器放不了';}
+  });
+})();
+</script>
+</body></html>

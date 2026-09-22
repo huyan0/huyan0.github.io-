@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>~ayuan</title>
+<!-- 这里只是个记事本。 -->
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}*,*::before,*::after{box-sizing:inherit}
+:root{--bg:#FFFFFF;--ink:#1D1F21;--muted:#6A737D;--acc:#2E7D5B;--line:#E4E7EA;--code:#F3F5F6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#15181B;--ink:#DADFE3;--muted:#8E979F;--acc:#6CC39A;--line:#2A2F34;--code:#1E2226}}
+:root[data-theme="dark"]{--bg:#15181B;--ink:#DADFE3;--muted:#8E979F;--acc:#6CC39A;--line:#2A2F34;--code:#1E2226}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.8 "PingFang SC","Microsoft YaHei",sans-serif}
+.w{max-width:640px;margin:0 auto;padding:40px 20px 60px}
+header{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:10px}
+header h1{font:bold 22px/1.2 ui-monospace,Menlo,Consolas,monospace;margin:0;color:var(--acc)}
+header p{margin:4px 0 0;color:var(--muted);font-size:13px}
+article{border-bottom:1px solid var(--line);padding:22px 0}
+time{font:12px ui-monospace,Menlo,Consolas,monospace;color:var(--muted)}
+h2{font-size:17px;margin:2px 0 8px}
+p{margin:0 0 10px}ul{margin:0;padding-left:1.3em}
+code{font:13px ui-monospace,Menlo,Consolas,monospace;background:var(--code);padding:1px 5px}
+a{color:var(--acc)}
+.visit{display:flex;align-items:center;gap:4px;font:14px ui-monospace,Menlo,Consolas,monospace;margin:6px 0}
+.visit input{font:inherit;border:1px solid var(--line);background:var(--code);color:var(--ink);padding:5px 8px;width:11em;max-width:50vw}
+.visit button{font:inherit;font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:13px;margin-left:8px;border:1px solid var(--acc);background:none;color:var(--acc);padding:4px 12px;cursor:pointer}
+.verr{color:#B3261E;font-size:13px;min-height:1em}
+footer{margin-top:24px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+</style></head>
+<body><div class="w">
+<header><h1>~ayuan</h1><p>代码写诗，诗写不出。　<a href="../bbs/index.html">回北窗</a></p></header>
+<article><time>2009-6-20</time><h2>最近很累。</h2><p>最近很累。</p></article><article><time>2008-12-30</time><h2>每日快照</h2><p>写了个小脚本，每天零点把论坛首页和杂谈版存一份静态快照，防止哪天数据库又炸了什么都不剩。</p><p>地址规则：<code>/archive/年月日/</code>，比如 2008 年 12 月 31 日的就是 <code>/archive/20081231/</code>。</p><p>只存首页和杂谈版，别的版块太大了。</p></article><article><time>2008-9-7</time><h2>每周备份</h2><p>论坛数据每周日凌晨自动打包，放在 <a href="../bbs/backup/index.html">backup 目录</a>。</p><p>压缩包加了密码，密码老规矩。</p></article><article><time>2008-5-18</time><h2>大家的小屋</h2><p>给常来的几个人各开了一个个人小屋，地址是 <code>/~用户名拼音/</code>。老K 放照片，某人放诗。想要的找我。</p><p>也可以直接在下面输入，去同学的小屋看看：</p><form id="visit" class="visit" autocomplete="off"><label for="vname">/~</label><input id="vname" name="vname" placeholder="用户名或拼音"><span>/</span><button type="submit">去看看</button></form><p class="verr" id="verr" role="alert"></p></article><article><time>2008-3-14</time><h2>北窗 Board 0.8.3 更新</h2><ul><li>修复：签名档过长时撑破页面的问题。</li><li>修复：连续感叹号导致帖子换行错位的问题。（不是针对谁）</li><li>新增：诗歌版支持竖排显示。应某人要求。</li><li>新增：打印本页功能。偷懒了，权限检查回头再加。</li></ul></article><article><time>2007-8-21</time><h2>建站笔记：robots.txt 是什么</h2><p>很多网站根目录下都有一个 <code>robots.txt</code>，是写给搜索引擎看的：哪些目录请不要收录。</p><p>但它谁都能看。所以有个很好笑的事实：一个网站最不想让人看到的地方，往往就老老实实列在这个文件里。</p><p>我的也写了。<a href="../robots.txt">看看我的</a>。</p></article><article><time>2007-2-10</time><h2>北窗 Board 0.5</h2><p>重写了帖子模块，终于不用每次发帖都刷新三遍了。</p><p>还是那句话：有 bug 请回帖。</p></article>
+<footer><span>© 2007–2009 阿沅</span><a href="../bbs/admin/index.html">管理入口</a></footer>
+</div>
+<script>
+(function(){
+  var MAP={'阿沅':'ayuan','纸鸢':'zhiyuan','老k':'laok','一粒盐':'yiliyan','观潮':'guanchao'};
+  var f=document.getElementById('visit'),i=document.getElementById('vname'),e=document.getElementById('verr');
+  if(!f)return;
+  i.addEventListener('input',function(){e.textContent='';});
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var v=(i.value||'').replace(/[\s\/~]/g,'').toLowerCase();
+    if(!v){e.textContent='先输入一个用户名。';return;}
+    var slug=MAP[v]||v;
+    if(!/^[a-z0-9_]+$/.test(slug)){e.textContent='没有这个人的小屋。试试拼音。';return;}
+    location.href='../~'+slug+'/index.html';
+  });
+  try{console.log('%c你也是爱看源码的人啊。 —— 阿沅','color:#2E7D5B');}catch(x){}
+})();
+</script>
+</body></html>

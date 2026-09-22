@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 768" width="1024" height="768">
+<rect width="1024" height="768" fill="#4E5B6E"/>
+<rect x="30" y="30" width="964" height="708" fill="none" stroke="#fff" stroke-opacity=".35" stroke-dasharray="10 8"/>
+<text x="512" y="370" font-family="sans-serif" font-size="30" fill="#fff" fill-opacity=".9" text-anchor="middle">素材占位</text>
+<text x="512" y="414" font-family="sans-serif" font-size="24" fill="#fff" fill-opacity=".8" text-anchor="middle">头班船</text>
+<text x="980" y="728" font-family="monospace" font-size="30" font-weight="bold" fill="#FF8A1E" text-anchor="end">'09 6 7</text>
+</svg>

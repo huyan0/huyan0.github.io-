@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>0317</title>
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}*,*::before,*::after{box-sizing:inherit}
+:root{--bg:#FFFFFF;--ink:#2B2B2B;--muted:#A0A0A0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#101112;--ink:#DCDCDC;--muted:#6E6E6E}}
+:root[data-theme="dark"]{--bg:#101112;--ink:#DCDCDC;--muted:#6E6E6E}
+html,body{min-height:100%;margin:0}body{background:var(--bg);color:var(--ink);font:16px/2.2 "STSong","Songti SC","SimSun","Noto Serif SC",serif}
+.w{max-width:440px;margin:0 auto;padding:18vh 24px 80px}
+.wait{color:var(--muted);text-align:center;letter-spacing:4px}
+.msg p{margin:0 0 18px}.msg .sign{text-align:right;margin-top:30px}
+.snd{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));border:1px solid var(--muted);background:var(--bg);color:var(--muted);font:12px sans-serif;padding:4px 10px;cursor:pointer}
+.msg{opacity:0;transition:opacity 4s ease}.msg.on{opacity:1}
+@media (prefers-reduced-motion: reduce){.msg{transition:none}}
+</style></head>
+<body><div class="w" id="w"><p class="wait">现在还不是时候。</p></div>
+<script>
+function bcNorm(s){return (s||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase();}
+function bcB64(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
+async function bcOpen(blob,pass){
+  var enc=new TextEncoder();
+  var base=await crypto.subtle.importKey('raw',enc.encode(bcNorm(pass)),'PBKDF2',false,['deriveKey']);
+  var key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:bcB64(blob.s),iterations:300000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+  var pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:bcB64(blob.i)},key,bcB64(blob.c));
+  return new TextDecoder().decode(pt);
+}
+function bcGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function bcSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function bcDel(k){try{localStorage.removeItem(k)}catch(e){}}
+
+var M={"s": "u8bo8Ww27V/jyhd1yfzlKw==", "i": "gSrTYswb+7j1I4C2", "c": "ARZo24vIkBvELPNZxtoOWkYc3918X1fZW7jR2kLxYwJka78dPiHLwbO/IgtNlTOI0YGSpfAl1WjHgDbfxp8J0NbCXjIclQK86qqaKfPXFc+X37TV0OqMoD4QK6pNuKclO3aUEFPGPGlNMNDUDy0+1HjHN34+GQmxAb2BCuD45YvJ6Bc68sq9lXwqkqyKw5ZqA3lOdI2yai5RMle0nbOspr5EvBglpwNJVN3MNlLnl5vJUtigs/Umdt+kdKlpjYTPXBICJ0mzhXfqK/wv8cRt43+jy1ePXear5ap+27SNEvOgfPxO0xhbWAIVPnth0vNiUVZra4VPj+9jkVy0UXnytS+fKktP5SDvDE9ho/taDr6PkD4r7C6frNISWaE6SG67ZIDPSFfENNozxPXTClXxMqpR+Bao2O31TBBxRtouxjDoOPPiz+v52rRN+fCXyc/ZOGZHZSVNYh1XpqFL1pDpAytPLxlhlAFZnoU0ME2FUS8Hr7SwNPbGY+Ya7dtEl2cDWhSU2mZguQgG6IFbaypYULYarBeAfS1MZ7Sv/JliT3TJ3rv1EdbTYVETVa2DBuxBbmLOnxG5fNMB9ZpWU6vvj8bN0Q8Qrt8c40zaA7yjRp2Xqix8pkPuqQeZ3dFgX5NlsGz7WE2wxsFEdX8ZI5kzPZX6S15SyR/VPhKP0xyIhT5s4lF8coCdPoq8RUhLr6PCrdtCQLXbXvm51yRG8yR/yG5adh5xXt1BZBCQtlmlR05o2YsAs5nvaoqiggqoD+Don0wYvjrshQyNo8zmeXcN2E9MgCmOQTtJrOqI7aSl+9wgafYxA4RMJK6wmV4b550MXS0Cm7djIgxuguEWOEraW0TfmWMGjurYJwTl9uEBAjzGL5oHqm6vke6A9jeq+ERQ3ZQ+V2KHqk/xd/TqrFsUBH03XfxrODmT9T7oyJRU2zkaxwHqyOlZuxDyg+hGesT+Gyct0fF/Z5LDtYtoakR7/esN8wsDoc+TyAmazukPiVGqDxFMUIqN85W2pt5YzI+rFZjJBv9YkJQl+fqR8N+uiO7PWo3jQpB42Rps2+mXh/OW8CAH/uc/nsAqKeUIlk48UYcuS/yM9qU//7cZhFmGGab1+xK+LqW5TmriPJ4MQ5CNHLxOj5W1EtPrer3kaZoR/PRGdgSEI5mS2imXYlxse3uYRWPyNVQEF7ZDsS2gGKnehhFDd2ZETCOki/ewcQhFeIBKEDBCUriYjyd4f0tS0AGUlQorXtolcD7z6nJ3HAdEy8Y8TxLMbvLrjuXXD6UauOAg71nhaBP27G6f636EJ/TuiKZB3PIvIwBXzYCtNyJ1gCc/uTXefTjUVAXjLwPmUhr6kZV/j7pjmGYuzR31zvBFjyAQcO3ULu0A0S+L/SxwetAWzjR7QOKLKQ+0fSPeaTe5lWCMDiMbq2ZNr0v1D0/Ds3I6VkrNZCJq5nTo2dTB5zy8RP2Sxylu47WZ71dVckUrzhAbtd3WnSf7QBc9Wgmrem77hNciClpCT1dLqawiqebY6jcjIE0z878jBvxs3wO4EifGQFEI9GQl5MVTdKf6/H/EyM3fm0mJ03Yac+S6kMq4RiWealpmSeEBz10DmaJG5A=="};
+function bj(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());var h=+p.find(function(x){return x.type==='hour'}).value%24,m=+p.find(function(x){return x.type==='minute'}).value;return h*60+m;}
+function inWindow(){var t=bj();return t>=197&&t<=207;}
+async function go(){
+  var k=bcGet('beichuang.k0317'); if(!k||!inWindow())return;
+  try{var h=await bcOpen(M,k);}catch(e){return;}
+  var w=document.getElementById('w');w.innerHTML=h;document.title='窗';
+  requestAnimationFrame(function(){requestAnimationFrame(function(){w.querySelector('.msg').classList.add('on');});});
+  var b=document.createElement('button');b.className='snd';b.type='button';b.textContent='打开声音';b.setAttribute('aria-pressed','false');document.body.appendChild(b);
+  var ctx=null,on=false;
+  b.addEventListener('click',function(){
+    try{
+      if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();
+        var len=ctx.sampleRate*4,buf=ctx.createBuffer(1,len,ctx.sampleRate),d=buf.getChannelData(0),last=0;
+        for(var i=0;i<len;i++){var wn=Math.random()*2-1;last=(last+0.02*wn)/1.02;d[i]=last*3.2;}
+        var src=ctx.createBufferSource();src.buffer=buf;src.loop=true;var f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=520;
+        var g=ctx.createGain();g.gain.value=0.35;var lfo=ctx.createOscillator(),lg=ctx.createGain();lfo.frequency.value=0.09;lg.gain.value=0.12;lfo.connect(lg);lg.connect(g.gain);
+        src.connect(f);f.connect(g);g.connect(ctx.destination);src.start();lfo.start();
+        setTimeout(function(){if(!ctx)return;var t=ctx.currentTime,o=ctx.createOscillator(),o2=ctx.createOscillator(),hg=ctx.createGain();o.frequency.value=110;o2.frequency.value=164.8;o.type=o2.type='sine';
+          hg.gain.setValueAtTime(0.0001,t);hg.gain.exponentialRampToValueAtTime(0.09,t+0.8);hg.gain.setValueAtTime(0.09,t+2.6);hg.gain.exponentialRampToValueAtTime(0.0001,t+4.5);
+          o.connect(hg);o2.connect(hg);hg.connect(ctx.destination);o.start(t);o2.start(t);o.stop(t+4.6);o2.stop(t+4.6);},9000);
+        on=true;b.textContent='关闭声音';b.setAttribute('aria-pressed','true');return;}
+      if(on){ctx.suspend();on=false;b.textContent='打开声音';b.setAttribute('aria-pressed','false');}else{ctx.resume();on=true;b.textContent='关闭声音';b.setAttribute('aria-pressed','true');}
+    }catch(e){b.textContent='无法播放声音';}
+  });
+  var watch=setInterval(function(){if(!inWindow()){clearInterval(watch);location.reload();}},30000);
+}
+go();
+</script></body></html>
