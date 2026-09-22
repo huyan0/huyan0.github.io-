@@ -1,0 +1,65 @@
+
+:root{--page:#E9EEF2;--box:#FFFFFF;--line:#C7D3DD;--line2:#DDE5EC;--bar:#2F5F8C;--bar2:#3F72A2;--bar-ink:#FFFFFF;--side:#F2F6F9;--head:#E4ECF3;--ink:#222222;--muted:#6B7580;--link:#1F4E86;--sig:#8A939B;--btn:#F4F7FA;--floor:#9AA6B1;--warn:#FFF8E1;--warn-line:#E8D8A8;--quote:#F7F9FB;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#161B20;--box:#1E252C;--line:#36424E;--line2:#2C3640;--bar:#23415F;--bar2:#2C4E71;--bar-ink:#E8EEF4;--side:#1A2027;--head:#233039;--ink:#DDE3E8;--muted:#98A3AD;--link:#8FB8E6;--sig:#7D8894;--btn:#26303A;--floor:#6F7B87;--warn:#2E2A1C;--warn-line:#5C5236;--quote:#1A2128}}
+:root[data-theme="dark"]{--page:#161B20;--box:#1E252C;--line:#36424E;--line2:#2C3640;--bar:#23415F;--bar2:#2C4E71;--bar-ink:#E8EEF4;--side:#1A2027;--head:#233039;--ink:#DDE3E8;--muted:#98A3AD;--link:#8FB8E6;--sig:#7D8894;--btn:#26303A;--floor:#6F7B87;--warn:#2E2A1C;--warn-line:#5C5236;--quote:#1A2128}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--page);color:var(--ink);font:13px/1.7 Tahoma,"SimSun","宋体","PingFang SC","Microsoft YaHei",sans-serif}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:10px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;padding:14px 4px 10px;gap:12px;flex-wrap:wrap}
+.logo{font-family:"STSong","SimSun","Songti SC",serif;font-size:30px;font-weight:bold;letter-spacing:6px;color:var(--bar);line-height:1}
+.logo a{color:inherit}.logo a:hover{text-decoration:none}
+.logo small{display:block;font-size:12px;letter-spacing:1px;font-weight:normal;color:var(--muted);margin-top:6px}
+.userbar{color:var(--muted);font-size:12px}
+.nav{background:var(--bar);border-top:1px solid var(--bar2);display:flex;flex-wrap:wrap}
+.nav a{color:var(--bar-ink);padding:6px 14px}.nav a:hover{background:var(--bar2);text-decoration:none}
+.crumb{background:var(--box);border:1px solid var(--line);border-top:0;padding:6px 10px;font-size:12px;color:var(--muted)}
+.tools{display:flex;justify-content:space-between;align-items:center;margin:10px 0 6px;flex-wrap:wrap;gap:6px}
+.btn{display:inline-block;background:var(--btn);border:1px solid var(--line);padding:2px 10px;font-size:12px;color:var(--ink);cursor:pointer;font-family:inherit}
+.btn:hover{text-decoration:none;border-color:var(--floor)}
+.pages{font-size:12px;color:var(--muted)}
+.box{background:var(--box);border:1px solid var(--line);margin-bottom:10px}
+.bh{background:var(--head);border-bottom:1px solid var(--line);padding:7px 10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.bh h1,.bh h2{font-size:14px;margin:0;font-weight:bold}
+.bh span{font-size:12px;color:var(--muted)}
+.post{display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid var(--line)}.post:last-child{border-bottom:0}
+.side{background:var(--side);border-right:1px solid var(--line2);padding:10px 12px;font-size:12px}
+.side .name{font-weight:bold;font-size:13px;margin-bottom:6px;display:block}
+.av{width:100px;height:100px;border:1px solid var(--line);background:var(--box);display:block;margin-bottom:6px}
+.side .title{color:var(--muted)}
+.side dl{margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:0 6px;color:var(--muted)}.side dd{margin:0;color:var(--ink)}
+.main{padding:8px 14px 12px;min-width:0;display:flex;flex-direction:column}
+.meta{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line2);padding-bottom:5px;margin-bottom:10px;font-size:12px;color:var(--muted);gap:10px;flex-wrap:wrap}
+.meta b{color:var(--floor)}
+.body{font-size:14px;line-height:1.8;flex:1;overflow-wrap:anywhere}
+.poem .body{font-family:"STSong","SimSun","Songti SC",serif;font-size:15px;line-height:2}
+.vertical .poem .body{writing-mode:vertical-rl;max-height:24em;overflow-x:auto;letter-spacing:2px}
+.sig{margin-top:18px;padding-top:6px;border-top:1px dashed var(--line2);font-size:12px;color:var(--sig);max-height:5em;overflow:hidden}
+.hidden-floor{color:var(--muted);font-size:12px;background:var(--quote);border:1px dashed var(--line);padding:6px 10px}
+.quote{background:var(--quote);border:1px dashed var(--line);padding:6px 10px;margin:6px 0;font-size:13px}
+.quote .qh{color:var(--muted);font-size:12px}.quote .qf{font-size:12px;text-align:right}
+.att{display:inline-block;margin:6px 6px 0 0}.att img{max-width:240px;width:100%;border:1px solid var(--line);display:block}
+.attcap{font-size:12px;color:var(--muted);margin-bottom:6px}
+.notice{background:var(--warn);border:1px solid var(--warn-line);margin:10px 0;padding:10px 12px;font-size:13px;color:var(--muted)}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th,.tbl td{border-bottom:1px solid var(--line2);padding:7px 10px;text-align:left;vertical-align:top}
+.tbl th{font-weight:normal;color:var(--muted);font-size:12px;background:var(--side)}
+.tbl td.n{color:var(--muted);font-size:12px;white-space:nowrap}
+.scroll{overflow-x:auto}
+.forumname{font-weight:bold;font-size:14px}.forumdesc{color:var(--muted);font-size:12px}
+.ghost,.ghost a,.ghost .forumdesc{color:var(--box)!important}
+.profile{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:14px}
+.profile dl{margin:0;display:grid;grid-template-columns:6em 1fr;gap:4px 10px}.profile dt{color:var(--muted)}.profile dd{margin:0}
+.sub{padding:10px 14px;border-top:1px solid var(--line2)}
+.sub h3{font-size:13px;margin:0 0 8px}
+.chart{display:grid;grid-template-columns:repeat(24,1fr);align-items:end;gap:2px;height:120px;border-bottom:1px solid var(--line)}
+.chart i{display:block;background:var(--bar2);min-height:1px}
+.chartx{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;font-size:10px;color:var(--muted);text-align:center}
+.foot{text-align:center;color:var(--muted);font-size:11px;padding:16px 0 24px;line-height:1.9}
+@media (max-width:640px){.wrap{padding:6px}.logo{font-size:24px}
+.post{grid-template-columns:1fr}
+.side{border-right:0;border-bottom:1px solid var(--line2);display:grid;grid-template-columns:44px 1fr;gap:0 10px;align-items:center;padding:8px 10px}
+.side .av{width:44px;height:44px;margin:0;grid-row:span 2}.side .name{margin:0}.side dl{display:none}.side .title{font-size:11px}
+.body{font-size:15px}.profile{grid-template-columns:1fr}.hide-m{display:none}}

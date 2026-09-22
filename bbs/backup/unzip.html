@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>在线解压（自用）</title>
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}*,*::before,*::after{box-sizing:inherit} body{margin:0;background:#ECE9D8;color:#000;font:13px/1.6 Tahoma,"SimSun",sans-serif}
+@media (prefers-color-scheme: dark){body{background:#1c1c1c;color:#ddd}.win{background:#2a2a2a!important;border-color:#555!important}pre{background:#111!important;color:#ddd!important}}
+.win{max-width:520px;margin:40px auto;background:#F4F3EE;border:1px solid #0A246A}.tt{background:#0A246A;color:#fff;padding:4px 8px;font-weight:bold}
+.c{padding:14px}input,select,button{font:inherit}input,select{padding:2px 4px;max-width:100%}pre{background:#fff;border:1px solid #999;padding:8px;white-space:pre-wrap;margin:10px 0 0}.err{color:#B3261E;min-height:1em;margin:6px 0 0}</style></head>
+<body><div class="win"><div class="tt">在线解压（自用） - 北窗 Board</div><div class="c">
+<form id="f" autocomplete="off"><div>文件：<select><option>backup_20090621.zip</option></select></div><div style="margin-top:8px"><label for="p">解压密码：</label><input id="p" type="password"> <button type="submit">解压</button></div><p class="err" id="e" role="alert"></p></form>
+<div id="out"></div></div></div>
+<script>
+function bcNorm(s){return (s||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase();}
+function bcB64(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
+async function bcOpen(blob,pass){
+  var enc=new TextEncoder();
+  var base=await crypto.subtle.importKey('raw',enc.encode(bcNorm(pass)),'PBKDF2',false,['deriveKey']);
+  var key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:bcB64(blob.s),iterations:300000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+  var pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:bcB64(blob.i)},key,bcB64(blob.c));
+  return new TextDecoder().decode(pt);
+}
+function bcGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function bcSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function bcDel(k){try{localStorage.removeItem(k)}catch(e){}}
+
+var B={"s": "OorhMiJvV9Ri9g+Ug+PKlA==", "i": "vtSN/OcGpdo/AGbC", "c": "h6geXHQpsT2UelanRg2n8dT62QXrJVy1cpNaLUKW8KqC3p1sHi+jECbQCnCpfkYtkDoey7+DUNJ6JuH/lO3kRJw+qzFWWd9MKe38YVnLc59GdRBv7Kpoky/dpwR8h61MfJWYZAfjQck821zb85IHEsOQ1pUelG9X4xLWBJ534tqxGlwdBIzfdRADlXm3FUFTAa51Dze3cxySeywnxlJ7wRd62kDSKPDIitpx9JD0POPMyPpPwdQd4uw95/4AUXFGNQq8skEHnzVdl4ICqDTfVT1CcuR8siq02IyS9lVwCUIoeun7InD7tUJrorx+9w1YuY9aaanDthdFlEiTDuW6Tl+G/Ojunr7F+0a66IBuZUkIEKQ5pLbYXwu2FawE2EuikBdnRlhjvIv5HD6Jnw98spigHNphQB2Ud/ab7+ooTbPFPkn/pFyEh/3kinmuxw11eVnAiA8YEMZgswDrpM7T47Dd+V8PKpYlcZxUAE+AmJWxu2PPLL55uJ0YPAKQL+H3ALid4hBLtODQL4DQx9ekrqJ9dj3wZgqkkon2sV9K0PyutIKDAa74o6wbIXdmxf1bnhF2caIrc4PfKYl0EYa2IoHAxj9I+iLUc/t4uBij1G/kR54Omtvmve4UahfhvtmXAoArp5VEkxCMmcAy1kTEPW94hTaHG7LwFMlJoipuz0yvOdYatPZ9h9DQJt1CzpB5k6o8cm5hPJ/o/GX8BAiyqpbDW6ziw6/lE3vnkH6iJcz59rQ/nV2rqIyMOFN+tpYiNaHU3pzJLV7tHMJXIXecMSoIUxtAz9D9h8zELWGkZUgQ4hSedmgMw6B32wDwJtk="};
+document.getElementById('p').addEventListener('input',function(){document.getElementById('e').textContent='';});
+document.getElementById('f').addEventListener('submit',async function(ev){ev.preventDefault();var v=document.getElementById('p').value,e=document.getElementById('e');
+ if(!bcNorm(v)){e.textContent='请输入解压密码。';return;} e.textContent='解压中……';
+ try{var d=JSON.parse(await bcOpen(B,v));e.textContent='解压完成，共 2 个文件。';var h='';for(var k in d){h+='<div style="margin-top:12px"><b>'+k+'</b><pre></pre></div>';}var o=document.getElementById('out');o.innerHTML=h;var pres=o.querySelectorAll('pre'),i=0;for(var k2 in d){pres[i++].textContent=d[k2];}}
+ catch(x){e.textContent='密码错误，解压失败。';}});
+</script></body></html>
