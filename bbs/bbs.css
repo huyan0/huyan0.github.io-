@@ -62,7 +62,7 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 .chart i{display:block;background:var(--bar2);min-height:1px}
 .chartx{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;font-size:10px;color:var(--muted);text-align:center}
 .corner{text-align:right;padding:3px 8px;border-top:1px solid var(--line2);font-size:11px}.corner a{color:var(--sig)}
-.lock{color:#C62828;font-weight:bold}.dead{color:var(--ink)}
+.lock{display:inline-block;background:#C62828;border:1px solid #8E1B1B;color:#FFFFFF;font-weight:bold;font-size:12px;line-height:1.4;padding:0 4px;margin-right:3px;vertical-align:1px}.dead{color:var(--ink)}
 .foot{text-align:center;color:var(--muted);font-size:11px;padding:16px 0 24px;line-height:1.9}
 @media (max-width:640px){.wrap{padding:6px}.logo{font-size:24px}
 .post{grid-template-columns:1fr}
