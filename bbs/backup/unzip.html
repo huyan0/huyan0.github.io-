@@ -4,10 +4,10 @@
 .win{max-width:520px;margin:40px auto;background:#F4F3EE;border:1px solid #0A246A}.tt{background:#0A246A;color:#fff;padding:4px 8px;font-weight:bold}
 .c{padding:14px}input,select,button{font:inherit}input,select{padding:2px 4px;max-width:100%}pre{background:#fff;border:1px solid #999;padding:8px;white-space:pre-wrap;margin:10px 0 0}.err{color:#B3261E;min-height:1em;margin:6px 0 0}</style></head>
 <body><div class="win"><div class="tt">在线解压（自用） - 北窗 Board</div><div class="c">
-<form id="f" autocomplete="off"><div>文件：<select><option>backup_20090621.zip</option></select></div><div style="margin-top:8px"><label for="p">解压密码：</label><input id="p" type="password"> <button type="submit">解压</button></div><p class="err" id="e" role="alert"></p></form>
+<form id="f" autocomplete="off"><div>文件：<select><option>backup_20090621.zip</option></select></div><p style="margin:8px 0 0;color:#666;font-size:12px">密码提示：那天。八位数字，例如 20080101。</p><div style="margin-top:8px"><label for="p">解压密码：</label><input id="p" type="password"> <button type="submit">解压</button></div><p class="err" id="e" role="alert"></p></form>
 <div id="out"></div></div></div>
 <script>
-function bcNorm(s){return (s||'').normalize('NFKC').replace(/\s+/g,'').toLowerCase();}
+function bcNorm(s){return (s||'').normalize('NFKC').replace(/[\s\p{P}]/gu,'').toLowerCase();}
 function bcB64(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
 async function bcOpen(blob,pass){
   var enc=new TextEncoder();
@@ -20,7 +20,7 @@ function bcGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function bcSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function bcDel(k){try{localStorage.removeItem(k)}catch(e){}}
 
-var B={"s": "OorhMiJvV9Ri9g+Ug+PKlA==", "i": "vtSN/OcGpdo/AGbC", "c": "h6geXHQpsT2UelanRg2n8dT62QXrJVy1cpNaLUKW8KqC3p1sHi+jECbQCnCpfkYtkDoey7+DUNJ6JuH/lO3kRJw+qzFWWd9MKe38YVnLc59GdRBv7Kpoky/dpwR8h61MfJWYZAfjQck821zb85IHEsOQ1pUelG9X4xLWBJ534tqxGlwdBIzfdRADlXm3FUFTAa51Dze3cxySeywnxlJ7wRd62kDSKPDIitpx9JD0POPMyPpPwdQd4uw95/4AUXFGNQq8skEHnzVdl4ICqDTfVT1CcuR8siq02IyS9lVwCUIoeun7InD7tUJrorx+9w1YuY9aaanDthdFlEiTDuW6Tl+G/Ojunr7F+0a66IBuZUkIEKQ5pLbYXwu2FawE2EuikBdnRlhjvIv5HD6Jnw98spigHNphQB2Ud/ab7+ooTbPFPkn/pFyEh/3kinmuxw11eVnAiA8YEMZgswDrpM7T47Dd+V8PKpYlcZxUAE+AmJWxu2PPLL55uJ0YPAKQL+H3ALid4hBLtODQL4DQx9ekrqJ9dj3wZgqkkon2sV9K0PyutIKDAa74o6wbIXdmxf1bnhF2caIrc4PfKYl0EYa2IoHAxj9I+iLUc/t4uBij1G/kR54Omtvmve4UahfhvtmXAoArp5VEkxCMmcAy1kTEPW94hTaHG7LwFMlJoipuz0yvOdYatPZ9h9DQJt1CzpB5k6o8cm5hPJ/o/GX8BAiyqpbDW6ziw6/lE3vnkH6iJcz59rQ/nV2rqIyMOFN+tpYiNaHU3pzJLV7tHMJXIXecMSoIUxtAz9D9h8zELWGkZUgQ4hSedmgMw6B32wDwJtk="};
+var B={"s": "lOEpyRCeulWh2S/KzFHltQ==", "i": "h1WvB9iFEKkULXMy", "c": "jmJZfY5f3t8uaytDAOYHay6/oqKFBPXWT0hBDVXqTD0PcmUFBETown+DN4+8O1Mx2TU2U9h1wEMwYG6WK9EOyQXete4bFMay9tbD1/NSh2Usoeoe6eUxoL7w/wQOiYjJ8mb4ALh1OAZrbP4CMsZHw32kYHjPxbRvKxjBnDGQukWY3g4VG3aXB+KSUcdIZ6x4fy0JNJg4POXwdDv1+m/mgysS6wzPp5jph6mgmq8gWoQORu3PqIG3NvC5CL9KiZXZvmYXtFt3m9vvk6xiPTEC8u18DAG1a7D0GV1xPuhLUypmecEpOsQPvhdoVgoNNzsONBjiNa4KxBgjaltJm9O7aa7lIe+txJblQR9SEERcxeBLEbYftnxTKch/GQnrp/zvkRjFPteckNl0mU4sgIby2JeR2ZAlq3u/KLAS8BuU6jIDFi3WcI9dJ04L1XoLFbJGw8lEZ8zCdiToFTFVPbIh28qWxvfMIKghbN+JP9g13baRmFYMZPtdeuwp93ml8OfNiWNZgzQo3NaKDi4BL9K1i4GN6R4b37htmL63jBlyv1rYDBzH9fX8pd+UjbGkDM7tLcx3/HdaMwWSGhmn24KDh12qOG6Avq+sW+EDodMXSr2+WP2JaCwNm+rhlaf9PHWosq76r3eVgUsu8/OAWx81lTtjclx5PDlkNsLin/bDSsB+vJFr1DibLnUj1v0deT2yrC0EXsZZ40RK0XlzGQdiQ1ydSQkOEQTB8/3gpy6oIezzgo2ekDpXiStiEP7mLU1+OmTf9Gayq2mNN8m77rlVs8SzVgOPEYiuSUqBcLyzqmLmRwH8xm7akJTiO0m9Kbc0xR1V6NgdpTc="};
 document.getElementById('p').addEventListener('input',function(){document.getElementById('e').textContent='';});
 document.getElementById('f').addEventListener('submit',async function(ev){ev.preventDefault();var v=document.getElementById('p').value,e=document.getElementById('e');
  if(!bcNorm(v)){e.textContent='请输入解压密码。';return;} e.textContent='解压中……';

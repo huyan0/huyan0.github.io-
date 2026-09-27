@@ -13,5 +13,7 @@
   }
   var v=document.getElementById('vtoggle');
   if(v){v.addEventListener('click',function(){document.body.classList.toggle('vertical');v.textContent=document.body.classList.contains('vertical')?'横排显示':'竖排显示';});}
+  var as=document.querySelectorAll('a[href]');
+  for(var i=0;i<as.length;i++){var a=as[i];if(a.closest('.nav,.crumb,.logo')||a.getAttribute('data-same')||a.getAttribute('href').charAt(0)==='#')continue;a.target='_blank';a.rel='noopener';}
   try{console.log('%c你也是爱看源码的人啊。 —— 阿沅','color:#2F5F8C;font-size:13px');}catch(e){}
 })();
